@@ -35,7 +35,6 @@ def overzetten_products():
             doelgroep = x['properties']['doelgroep']
             price= x['price']['selling_price']
             price=price/100
-
             cur.execute("insert into products (product_id, brand, category, gender,doelgroep,price) values (%s,%s,%s,%s,%s,%s)",(productid, brand, category, gender,doelgroep,price))
             i+=1
     conn.commit()
@@ -49,7 +48,7 @@ cur.execute('select product_id from products')
 product_id = cur.fetchall()
 print(sessions[0])
 print(products[0]["_id"])
-print(product_id[0])
+
 #for x in products:
 #   print(x['brand'])
 
