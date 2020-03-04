@@ -26,7 +26,8 @@ def overzetten_products():
     i=0
     for x in products:
         try:
-            if x['_id'] not in product_id:
+            check_id= x['_id']
+            if check_id not in product_id[i]:
                 productid = x['_id']
                 brand= x['brand']
                 category = x['category']
@@ -35,7 +36,9 @@ def overzetten_products():
                 price= x['price']['selling_price']
                 price=price/100
                 cur.execute("insert into products (product_id, brand, category, gender,doelgroep,price) values (%s,%s,%s,%s,%s,%s)",(productid, brand, category, gender,doelgroep,price))
+                i+=1
             else:
+                i+=1
                 continue
         except KeyError:
             continue
@@ -44,6 +47,6 @@ def overzetten_products():
     cur.close()
     conn.close()
     return
-#overzetten_products()
+overzetten_products()
 
 
