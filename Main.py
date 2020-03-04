@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import psycopg2
 
-#postgres
+#postgresa
 conn = psycopg2.connect(database="voordeelshop", user = "postgres", password = "groep5", host = "127.0.0.1", port = "5432")
 cur = conn.cursor()
 print("Opened database successfully")
