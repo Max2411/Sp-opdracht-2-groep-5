@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 import psycopg2
+c= psycopg2.connect('dbname=postgres user=postgres password=')
 
 #postgres
 conn = psycopg2.connect(database="voordeelshop", user = "postgres", password = "groep5", host = "127.0.0.1", port = "5432")
@@ -49,3 +50,16 @@ def overzetten_products():
     cur.close()
     conn.close()
     return
+
+
+
+import csv_
+
+with open(prodc, w, newline='')as csvout:
+    fieldnames =['id',]
+    writer =  csv.DictWriter(csvout,fieldnames=fieldnames)
+    writer.writeheader()
+    for pro in mongdb.find('id', products["_id"],
+                            "catogory"
+
+                           )
