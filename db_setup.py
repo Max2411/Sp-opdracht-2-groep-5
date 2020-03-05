@@ -14,14 +14,17 @@ cur.execute("""create table products
 	        gender varchar,
 	        doelgroep varchar,
 	        price decimal(6,2));""")
-#cur.execute("""create table sesions();
+#cur.execute("""create table sesions
+#            (session_id varchar PRIMARY KEY,
+#
+#);
 #""")
 
 
 
 
 
-
+print("New database added")
 conn.commit()
 cur.close()
 conn.close()
