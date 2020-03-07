@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import psycopg2
-from c_configuratie import config
+from b_configuratie import config
 
 
 def connect():
