@@ -2,11 +2,12 @@ from pymongo import MongoClient
 import psycopg2
 import csv
 
-# verbinding postgres, psycopg2, sql
+# verbinding sql / sycopg2 / postgres / pgadmin, mongodb
 connection = psycopg2.connect('dbname=postgres user=postgres password=groep5')
-cursor = connection.cursor()
+client = MongoClient('mongodb://localhost:27017/')
 
-# verbinding Mongoclient. defineren variabelen
+# defineren variabelen
+cursor = connection.cursor()
 client = MongoClient('mongodb://localhost:27017/')
 database = client.huwebshop
 collection = database.products
