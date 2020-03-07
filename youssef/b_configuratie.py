@@ -2,7 +2,7 @@
 from configparser import ConfigParser
 
 
-def config(filename='verbinding_parameters.ini', section='postgresql'):
+def config(filename='a_verbinding_parameters.ini', section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
