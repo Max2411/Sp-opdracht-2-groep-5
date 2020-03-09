@@ -18,7 +18,7 @@ sessions= ses.find({})
 
 
 def overzetten_products(): #bron: slack info van de les gestuurd door rik boss
-    with open('test.csv', 'w', newline='') as csvout:
+    with open('products.csv', 'w', newline='') as csvout:
         fieldnames = ['id','brand', 'category', 'gender', 'doelgroep','price']
         writer = csv.DictWriter(csvout, fieldnames=fieldnames)
         writer.writeheader()
