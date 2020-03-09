@@ -7,8 +7,7 @@ connection = psycopg2.connect('dbname=postgres user=postgres password=groep5')
 client = MongoClient('mongodb://localhost:27017/')
 
 # defineren variabelen
-# cursor = connection.cursor()
-client = MongoClient('mongodb://localhost:27017/')
+cursor = connection.cursor()
 database = client.huwebshop
 # voor onderstaande:.x aanpassen om andere collectie op te halen
 ophalen = database.products
@@ -38,3 +37,4 @@ with open(bestandsnaam, 'w') as csvfile:
     writer.writeheader()
     # writing data rows
     writer.writerows(mydict)
+# \copy products FROM ‘cpath\to\csv.csv’ DELIMITER ‘,’ CSV HEADER;

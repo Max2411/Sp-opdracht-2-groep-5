@@ -1,13 +1,13 @@
 from pymongo import MongoClient
 import psycopg2
 
-#postgres
+#Connect to postgres
 conn= psycopg2.connect('dbname=postgres user=postgres password=groep5')
 #conn = psycopg2.connect(database="voordeelshop", user = "postgres", password = "groep5", host = "127.0.0.1", port = "5432")
 cur = conn.cursor()
 print("Opened database successfully")
 
-#mongodb
+#Connect to mongodb
 client = MongoClient('mongodb://localhost:27017/')
 db = client.huwebshop
 col = db.products
@@ -42,5 +42,6 @@ def overzetten_products():
     conn.close()
     return
 overzetten_products()
+
 
 
