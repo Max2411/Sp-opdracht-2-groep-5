@@ -30,6 +30,13 @@ cur.execute("""CREATE TABLE order_table
            (order_id serial primary key,
            product_id varchar,
            session_id varchar);""")
+cur.execute("""CREATE TABLE profiles
+            profile_id 
+            
+            
+            """)
+
+
 cur.execute("""create table brand
            (brand_id serial primary key,
            brand_name varchar unique
