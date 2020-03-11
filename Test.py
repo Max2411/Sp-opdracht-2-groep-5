@@ -18,15 +18,19 @@ def overzetten_products(filename):  #bron: slack info van de les gestuurd door r
                 productid = product['_id']
                 brand = product['brand']
                 category = product['category']
+                sub_category = product['sub_category']
+                sub_sub_category = product['sub_sub_category']
                 gender = product['gender']
-                doelgroep = product['properties']['doelgroep']
+                target_audience = product['properties']['doelgroep']
                 price = product['price']['selling_price']
                 price = price / 100
                 writer.writerow({'id': productid,
                                  'brand':brand,
                                  'category': category,
+                                 'sub_category': sub_category,
+                                 'sub_sub_category': sub_sub_category,
                                  'gender':gender,
-                                 'target_audience': doelgroep,
+                                 'target_audience': target_audience,
                                  'price': price
                                  })
             except KeyError:
@@ -58,7 +62,8 @@ def overzetten_sessions(filename): #bron: slack info van de les gestuurd door ri
             if c % 30000 == 0:      #For testing purpose
                 print("Finish test")
                 break
-#overzetten_products('products.csv')
+    
+overzetten_products('products.csv')
 overzetten_sessions('sessions.csv')
 
 
