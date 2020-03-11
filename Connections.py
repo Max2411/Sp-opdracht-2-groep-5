@@ -2,7 +2,6 @@ from pymongo import MongoClient
 import psycopg2
 
 
-
 def psycopg_connect():
     conn = psycopg2.connect('dbname=postgres user=postgres password=groep5')
     cur = conn.cursor()

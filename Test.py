@@ -6,6 +6,7 @@ conn,cur=psycopg_connect()
 
 products, sessions, profiles=mongo_connect()
 
+
 def overzetten_products(filename):  #bron: slack info van de les gestuurd door rik boss
     with open(filename, 'w', newline='') as csvout:
         fieldnames = ['id','brand', 'category', 'gender', 'target_audience','price']
@@ -37,7 +38,7 @@ def overzetten_products(filename):  #bron: slack info van de les gestuurd door r
                 print("Finish test")
                 break
 
-
     print("Finished creating the product database contents.")
-overzetten_products('products.csv')
 
+
+overzetten_products('products.csv')
