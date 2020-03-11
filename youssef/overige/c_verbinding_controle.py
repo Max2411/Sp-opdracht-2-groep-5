@@ -1,3 +1,5 @@
+#https://www.geeksforgeeks.org/mongodb-and-python/
+
 #!/usr/bin/python
 import psycopg2
 from b_configuratie import config
