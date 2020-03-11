@@ -2,14 +2,18 @@ from Connections import psycopg_connect
 conn, cur=psycopg_connect()
 
 print("Opened database successfully")
+
 cur.execute("DROP TABLE IF EXISTS order_table ")
+cur.execute("DROP TABLE IF EXISTS products ")
 cur.execute("DROP TABLE IF EXISTS brand ")
 cur.execute("DROP TABLE IF EXISTS category ")
+cur.execute("DROP TABLE IF EXISTS sub_category ")
+cur.execute("DROP TABLE IF EXISTS sub_sub_category ")
 
 
 cur.execute("DROP TABLE IF EXISTS sessions ")
 cur.execute("DROP TABLE IF EXISTS profile ")
-cur.execute("DROP TABLE IF EXISTS products ")
+
 
 cur.execute("""create table products
             (product_id varchar PRIMARY KEY,
@@ -28,12 +32,12 @@ cur.execute("""CREATE TABLE order_table
            session_id varchar);""")
 cur.execute("""create table brand
            (brand_id serial primary key,
-           brand varchar unique
+           brand_name varchar unique
            );""")
 cur.execute("""create table category
            (category_id serial PRIMARY KEY,
            sub_category_id serial,
-           category varchar
+           category_name varchar
            );""")
 cur.execute("""create table sub_category
            (sub_category_id serial PRIMARY KEY,
