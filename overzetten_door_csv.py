@@ -69,8 +69,9 @@ def overzetten_order(filename): #bron: slack info van de les gestuurd door rik b
         for session in sessions:
             try:
                 sessionid = session["_id"]
-                productid= session['order']['products']['id']
-                writer.writerow({'session_id': sessionid,
+                for i in session['events']['products']:
+                    productid = i
+                    writer.writerow({'session_id': sessionid,
                                 'product_id': productid
                                  })
             except KeyError:

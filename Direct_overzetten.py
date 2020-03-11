@@ -6,7 +6,7 @@ products, sessions, profiles = mongo_connect()
 
 
 def overzetten_products():
-
+    'Direct overzetten van producten. Kan alleen als de table leeg is.'
     c=0
     for product in products:
         try:
@@ -32,7 +32,7 @@ def overzetten_products():
     return
 
 def overzetten_sessions():
-
+    'Direct overzetten van sessions. Kan alleen als de table leeg is.'
     c=0
     for session in sessions:
         try:
@@ -50,5 +50,6 @@ def overzetten_sessions():
     return
 
 
-overzetten_sessions()
+
 overzetten_products()
+overzetten_sessions()
