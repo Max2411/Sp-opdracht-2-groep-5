@@ -32,38 +32,45 @@ def create_collection_list(mongo_db, collection_chosen):
 
 
 cursor_created('AAIrdb', 'postgres', 'postgrespass')  # bij jullie moet het 'postgres', 'postgres', 'groep5' zijn
-mongo_db, collection_chosen = 'AAIMongo', 'products'  # bij jullie moet het denk ik 'huwebshop' en 'products' zijn
-products = connect_collection(mongo_db, collection_chosen)
-create_collection_list(mongo_db, collection_chosen)
+mongo_db, collection_chosen_p, collection_chosen_s, collection_chosen_pf = 'AAIMongo', 'products', 'sessions', 'profiles'  # bij jullie moet het denk ik 'huwebshop' zijn.
+products = connect_collection(mongo_db, collection_chosen_p)
+sessions = connect_collection(mongo_db, collection_chosen_s)
+profiles = connect_collection(mongo_db, collection_chosen_pf)
+create_collection_list(mongo_db, collection_chosen_p)
+create_collection_list(mongo_db, collection_chosen_s)
+create_collection_list(mongo_db, collection_chosen_pf)
 
 
-# def overzetten_products(): #bron: slack info van de les gestuurd door rik boss
-#     with open('test.csv', 'w', newline='') as csvout:
-#         fieldnames = ['id','brand', 'category', 'gender', 'doelgroep','price']
-#         writer = csv.DictWriter(csvout, fieldnames=fieldnames)
-#         writer.writeheader()
-#         c = 0
-#         for product in products:
-#             try:
-#                 productid = product['_id']
-#                 brand = product['brand']
-#                 category = product['category']
-#                 gender = product['gender']
-#                 doelgroep = product['properties']['doelgroep']
-#                 price = product['price']['selling_price']
-#                 price = price / 100
-#                 writer.writerow({'id': productid,
-#                                  'brand':brand,
-#                                  'category': category,
-#                                  'gender':gender,
-#                                  'doelgroep': doelgroep,
-#                                  'price': price
-#                                  })
-#             except KeyError:
-#                 continue
-#             c += 1
-#             if c % 10000 == 0:
-#                 print("{} product records written...".format(c))
-#     print("Finished creating the product database contents.")
-# overzetten_products()
-# # \copy products FROM ‘cpath\to\csv.csv’ DELIMITER ‘,’ CSV HEADER;
+
+
+
+def overzetten_products(collection_wanted):  #bron: slack info van de les gestuurd door rik boss
+    with open('test.csv', 'w', newline='') as csvout:
+        fieldnames = ['id','brand', 'category', 'gender', 'doelgroep','price']
+        writer = csv.DictWriter(csvout, fieldnames=fieldnames)
+        writer.writeheader()
+        c = 0
+        for item in collection_wanted:
+            try:
+                productid = item['_id']
+                brand = item['brand']
+                category = item['category']
+                gender = item['gender']
+                doelgroep = item['properties']['doelgroep']
+                price = item['price']['selling_price']
+                price = price / 100
+                writer.writerow({'id': productid,
+                                 'brand':brand,
+                                 'category': category,
+                                 'gender':gender,
+                                 'doelgroep': doelgroep,
+                                 'price': price
+                                 })
+            except KeyError:
+                continue
+            c += 1
+            if c % 10000 == 0:
+                print("{} product records written...".format(c))
+    print("Finished creating the product database contents.")
+overzetten_products()
+# \copy products FROM ‘cpath\to\csv.csv’ DELIMITER ‘,’ CSV HEADER;
