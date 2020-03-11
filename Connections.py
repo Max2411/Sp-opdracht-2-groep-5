@@ -3,10 +3,12 @@ import psycopg2
 conn= psycopg2.connect('dbname=postgres user=postgres password=groep5')
 cur = conn.cursor()
 
+
 def psycopg_connect():
     conn = psycopg2.connect('dbname=postgres user=postgres password=groep5')
     cur = conn.cursor()
     return conn, cur
+
 
 def mongo_connect():
     client = MongoClient('mongodb://localhost:27017/')

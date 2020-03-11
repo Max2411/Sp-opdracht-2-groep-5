@@ -81,9 +81,6 @@ cur.execute("""alter table brand
 #            );""")
 
 
-
-
-
 print("New database added")
 
 conn.commit()

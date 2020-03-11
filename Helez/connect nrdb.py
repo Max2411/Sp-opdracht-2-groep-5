@@ -12,17 +12,21 @@ def cursor_created(database_name, user, password):
 
 def connect_collection(collection_chosen):  # Connect met een collectie die je kan kiezen bij aanroepen.(procedureel)
     client = MongoClient('mongodb://localhost:27017/')
-    database = client.webshop
+    database = client.huwebshop
     collection = database[collection_chosen]
     return collection
 
 
 def create_collection_list():
-    collection_created = connect_collection().find({})
-    return collection_created
+    products_col = connect_collection(products).find({})
+    sessions_col = connect_collection(sessions).find({})
+    profiles_col = connect_collection(profiles).find({})
+    return
 
 
-cursor_created('postgres', 'postgres', 'groep5'), connect_collection(products)
+cursor_created('postgres', 'postgres', 'groep5'),
+products = connect_collection(products),
+sessions = connect_collection(sessions)
 
 
 def overzetten_products(): #bron: slack info van de les gestuurd door rik boss

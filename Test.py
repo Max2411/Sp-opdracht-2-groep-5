@@ -37,6 +37,7 @@ def overzetten_products(filename): #bron: slack info van de les gestuurd door ri
                 print("Finish test")
                 break
 
+
     print("Finished creating the product database contents.")
 overzetten_products('products.csv')
 
