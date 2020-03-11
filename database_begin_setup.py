@@ -9,10 +9,9 @@ cur.execute("DROP TABLE IF EXISTS brand ")
 cur.execute("DROP TABLE IF EXISTS category ")
 cur.execute("DROP TABLE IF EXISTS sub_category ")
 cur.execute("DROP TABLE IF EXISTS sub_sub_category ")
-
-
 cur.execute("DROP TABLE IF EXISTS sessions ")
 cur.execute("DROP TABLE IF EXISTS profiles ")
+
 
 
 cur.execute("""create table products
@@ -22,6 +21,7 @@ cur.execute("""create table products
 	        sub_category varchar,
 	        sub_sub_category varchar,
 	        gender varchar,
+	        repeat_buy varchar,
 	        target_audience varchar, 
 	        price decimal(6,2));""")
 cur.execute("""create table sessions

@@ -22,6 +22,7 @@ cur.execute("""create table products
 	        sub_category varchar,
 	        sub_sub_category varchar,
 	        gender varchar,
+	        repeat_buy varchar,
 	        target_audience varchar, 
 	        price decimal(6,2));""")
 cur.execute("""create table sessions

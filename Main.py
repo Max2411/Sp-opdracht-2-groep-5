@@ -1,47 +1,62 @@
-from pymongo import MongoClient
-import psycopg2
 
-#Connect to postgres
-conn= psycopg2.connect('dbname=postgres user=postgres password=groep5')
-#conn = psycopg2.connect(database="voordeelshop", user = "postgres", password = "groep5", host = "127.0.0.1", port = "5432")
-cur = conn.cursor()
-print("Opened database successfully")
+from Connections import psycopg_connect
+from Connections import mongo_connect
 
-# Connect to mongodb
-client = MongoClient('mongodb://localhost:27017/')
-db = client.huwebshop
-col = db.products
-ses = db.sessions
-products = col.find({})
-sessions = ses.find({})
+conn,cur=psycopg_connect()
+
+products, sessions, profiles = mongo_connect()
+
 
 print(products[0])
 # for x in products:
-#   print(x['brand'],x['properties']['doelgroep'])
+#    print(x['brand'],x['properties']['doelgroep'])
 
 
 def overzetten_products():
-    cur.execute('select product_id from products')
-    product_id = cur.fetchall()
-    print(product_id)
-    print(products[0]['_id'])
-    for x in products:
+
+    c=0
+    for product in products:
         try:
-            productid = x['_id']
-            brand = x['brand']
-            category = x['category']
-            gender = x['gender']
-            doelgroep = x['properties']['doelgroep']
-            price = x['price']['selling_price']
-            price =price/100
-            cur.execute("insert into products (product_id, brand, category, gender,doelgroep,price) values (%s,%s,%s,%s,%s,%s)",(productid, brand, category, gender,doelgroep,price))
+            productid = product['_id']
+            brand = product['brand']
+            category = product['category']
+            sub_category = product['sub_category']
+            sub_sub_category = product['sub_sub_category']
+            gender = product['gender']
+
+            target_audience = product['properties']['doelgroep']
+            price = product['price']['selling_price']
+            price = price / 100
+            cur.execute("insert into products (product_id, brand, category,sub_category,sub_sub_category, gender,target_audience,price) values (%s,%s,%s,%s,%s,%s,%s,%s)",(productid, brand, category,sub_category,sub_sub_category, gender,target_audience,price))
         except KeyError:
             continue
-
+        c+=1
+        if c==1000:
+            break
     conn.commit()
     cur.close()
     conn.close()
+
+    return
+
+def overzetten_sessions():
+
+    c=0
+    for session in sessions:
+        try:
+            sessionid = session["_id"]
+            cur.execute("insert into products (session_id) values (%s)",(sessionid))
+        except KeyError:
+            continue
+        c+=1
+        if c==1000:
+            break
+    conn.commit()
+    cur.close()
+    conn.close()
+
     return
 
 
+overzetten_sessions()
 overzetten_products()
