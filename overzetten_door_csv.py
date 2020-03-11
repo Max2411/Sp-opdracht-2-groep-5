@@ -8,6 +8,10 @@ products, sessions, profiles = mongo_connect()
 
 
 def overzetten_products(filename):  #bron: slack info van de les gestuurd door rik boss
+    """
+    al deze functies zetten de gegevens over in een csv bestand. Dit bestand zetten wij dan over via de imoprt van postgres,
+    want de command voor het overzetten deed het niet.
+    """
     with open(filename, 'w', newline='') as csvout:
         fieldnames = ['id','brand', 'category','sub_category','sub_sub_category', 'gender', 'target_audience','price']
         writer = csv.DictWriter(csvout, fieldnames=fieldnames)
