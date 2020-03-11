@@ -21,12 +21,14 @@ def create_collection_list():
     products_col = connect_collection(products).find({})
     sessions_col = connect_collection(sessions).find({})
     profiles_col = connect_collection(profiles).find({})
-    return
+    return products_col, sessions_col, profiles_col
 
 
-cursor_created('postgres', 'postgres', 'groep5'),
-products = connect_collection(products),
-sessions = connect_collection(sessions)
+cursor_created('postgres', 'postgres', 'groep5')
+create_collection_list()
+# products = connect_collection(products),
+# sessions = connect_collection(sessions)
+# profiles = connect_collection(profiles)
 
 
 def overzetten_products(): #bron: slack info van de les gestuurd door rik boss
