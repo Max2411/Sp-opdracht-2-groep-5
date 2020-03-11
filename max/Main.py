@@ -7,17 +7,18 @@ conn= psycopg2.connect('dbname=postgres user=postgres password=groep5')
 cur = conn.cursor()
 print("Opened database successfully")
 
-#Connect to mongodb
+# Connect to mongodb
 client = MongoClient('mongodb://localhost:27017/')
 db = client.huwebshop
 col = db.products
-ses= db.sessions
+ses = db.sessions
 products = col.find({})
-sessions= ses.find({})
+sessions = ses.find({})
 
 print(products[0])
-#for x in products:
+# for x in products:
 #   print(x['brand'],x['properties']['doelgroep'])
+
 
 def overzetten_products():
     cur.execute('select product_id from products')
@@ -27,12 +28,12 @@ def overzetten_products():
     for x in products:
         try:
             productid = x['_id']
-            brand= x['brand']
+            brand = x['brand']
             category = x['category']
             gender = x['gender']
             doelgroep = x['properties']['doelgroep']
-            price= x['price']['selling_price']
-            price=price/100
+            price = x['price']['selling_price']
+            price =price/100
             cur.execute("insert into products (product_id, brand, category, gender,doelgroep,price) values (%s,%s,%s,%s,%s,%s)",(productid, brand, category, gender,doelgroep,price))
         except KeyError:
             continue
@@ -41,7 +42,6 @@ def overzetten_products():
     cur.close()
     conn.close()
     return
+
+
 overzetten_products()
-
-
-
