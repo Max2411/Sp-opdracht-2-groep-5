@@ -37,8 +37,7 @@ def overzetten_products(filename):  #bron: slack info van de les gestuurd door r
                 continue
             c += 1
             if c % 10000 == 0:
-                print("{} product records written...".format(c))
-            if c % 30000 == 0:      #For testing purpose
+                print("{} product records written...".format(c))    #For testing purpose
                 print("Finish test")
                 break
 
@@ -59,11 +58,49 @@ def overzetten_sessions(filename): #bron: slack info van de les gestuurd door ri
             c += 1
             if c % 10000 == 0:
                 print("{} product records written...".format(c))
-            if c % 30000 == 0:      #For testing purpose
-                print("Finish test")
-                break
+                break #voor testen
 
-overzetten_products('product.csv')
-overzetten_sessions('sessions.csv')
+def overzetten_order(filename): #bron: slack info van de les gestuurd door rik boss
+    with open(filename, 'w', newline='') as csvout:
+        fieldnames = ["session_id",'product_id']
+        writer = csv.DictWriter(csvout, fieldnames=fieldnames)
+        writer.writeheader()
+        c = 0
+        for session in sessions:
+            try:
+                sessionid = session["_id"]
+                productid= session['order']['products']['id']
+                writer.writerow({'session_id': sessionid,
+                                'product_id': productid
+                                 })
+            except KeyError:
+                continue
+            c += 1
+            if c % 10000 == 0:
+                print("{} product records written...".format(c))
+                break #voor testen
+
+def overzetten_profiles(filename): #bron: slack info van de les gestuurd door rik boss
+    with open(filename, 'w', newline='') as csvout:
+        fieldnames = ["profile_id"]
+        writer = csv.DictWriter(csvout, fieldnames=fieldnames)
+        writer.writeheader()
+        c = 0
+        for profile in profiles:
+            try:
+                profile_id = profile["_id"]
+                writer.writerow({'profile_id': profile_id
+                                 })
+            except KeyError:
+                continue
+            c += 1
+            if c % 10000 == 0:
+                print("{} product records written...".format(c))
+                break #voor testen
+
+# overzetten_products('products.csv')
+# overzetten_sessions('sessions.csv')
+overzetten_order('order_table.csv')
+overzetten_profiles("profile.csv")
 
 

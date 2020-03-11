@@ -29,17 +29,13 @@ cur.execute("""create table sessions
 cur.execute("""CREATE TABLE order_table
            (order_id serial primary key,
            product_id varchar,
-           session_id varchar);""")
+           session_id varchar,
+           foreign key(product_id) references products(product_id),
+           foreign key(session_id) references sessions(session_id));""")
 cur.execute("""CREATE TABLE profiles(
             profile_id integer unique primary key 
             )""")
 
-cur.execute("""alter table order_table
-            add constraint Prod_id
-            foreign key(product_id) references products(product_id);""")
-cur.execute("""alter table order_table
-            add constraint Ses_id
-            foreign key(session_id) references sessions(session_id);""")
 
 
 

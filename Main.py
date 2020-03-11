@@ -1,15 +1,8 @@
-
 from Connections import psycopg_connect
 from Connections import mongo_connect
 
 conn,cur=psycopg_connect()
-
 products, sessions, profiles = mongo_connect()
-
-
-print(products[0])
-# for x in products:
-#    print(x['brand'],x['properties']['doelgroep'])
 
 
 def overzetten_products():
@@ -36,7 +29,6 @@ def overzetten_products():
     conn.commit()
     cur.close()
     conn.close()
-
     return
 
 def overzetten_sessions():
@@ -45,6 +37,7 @@ def overzetten_sessions():
     for session in sessions:
         try:
             sessionid = session["_id"]
+
             cur.execute("insert into products (session_id) values (%s)",(sessionid))
         except KeyError:
             continue
@@ -54,7 +47,6 @@ def overzetten_sessions():
     conn.commit()
     cur.close()
     conn.close()
-
     return
 
 
