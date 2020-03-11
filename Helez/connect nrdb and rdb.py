@@ -41,9 +41,6 @@ create_collection_list(mongo_db, collection_chosen_s)
 create_collection_list(mongo_db, collection_chosen_pf)
 
 
-
-
-
 def overzetten_products(collection_wanted):  #bron: slack info van de les gestuurd door rik boss
     with open('test.csv', 'w', newline='') as csvout:
         fieldnames = ['id','brand', 'category', 'gender', 'doelgroep','price']

@@ -6,7 +6,7 @@ conn,cur=psycopg_connect()
 
 products, sessions, profiles=mongo_connect()
 
-def overzetten_products(filename): #bron: slack info van de les gestuurd door rik boss
+def overzetten_products(filename):  #bron: slack info van de les gestuurd door rik boss
     with open(filename, 'w', newline='') as csvout:
         fieldnames = ['id','brand', 'category', 'gender', 'target_audience','price']
         writer = csv.DictWriter(csvout, fieldnames=fieldnames)
