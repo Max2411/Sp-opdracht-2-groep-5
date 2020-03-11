@@ -6,9 +6,9 @@ conn,cur=psycopg_connect()
 
 products, sessions, profiles=mongo_connect()
 
-def overzetten_products(): #bron: slack info van de les gestuurd door rik boss
-    with open('products.csv', 'w', newline='') as csvout:
-        fieldnames = ['id','brand', 'category', 'gender', 'doelgroep','price']
+def overzetten_products(filename): #bron: slack info van de les gestuurd door rik boss
+    with open(filename, 'w', newline='') as csvout:
+        fieldnames = ['id','brand', 'category', 'gender', 'target_audience','price']
         writer = csv.DictWriter(csvout, fieldnames=fieldnames)
         writer.writeheader()
         c = 0
@@ -25,7 +25,7 @@ def overzetten_products(): #bron: slack info van de les gestuurd door rik boss
                                  'brand':brand,
                                  'category': category,
                                  'gender':gender,
-                                 'doelgroep': doelgroep,
+                                 'target_audience': doelgroep,
                                  'price': price
                                  })
             except KeyError:
@@ -33,6 +33,10 @@ def overzetten_products(): #bron: slack info van de les gestuurd door rik boss
             c += 1
             if c % 10000 == 0:
                 print("{} product records written...".format(c))
+            if c % 30000 == 0:      #For testing purpose
+                print("Finish test")
+                break
+
     print("Finished creating the product database contents.")
-overzetten_products()
-# \copy products FROM ‘cpath\to\csv.csv’ DELIMITER ‘,’ CSV HEADER;
+overzetten_products('products.csv')
+
