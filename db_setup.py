@@ -32,8 +32,6 @@ cur.execute("""CREATE TABLE order_table
            session_id varchar);""")
 cur.execute("""CREATE TABLE profiles
             profile_id 
-            
-            
             """)
 
 
@@ -56,7 +54,6 @@ cur.execute("""create table sub_sub_category
            sub_category_id serial,
            sub_sub_category varchar
            );""")
-
 cur.execute("""alter table products
             add constraint cat_id
             foreign key(category) references category(category_id);""")
